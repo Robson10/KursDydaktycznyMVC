@@ -1,0 +1,11 @@
+﻿
+@{
+    ViewBag.Title = "TestResult";
+    Layout = "~/Views/Shared/Logged.cshtml";
+}
+
+<h2>Wynik</h2>
+
+@if (Session["Result"] != null)
+{<h3> @Session["Result"].ToString() </h3>}
+

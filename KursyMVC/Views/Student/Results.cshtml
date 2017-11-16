@@ -1,0 +1,41 @@
+﻿@model IEnumerable<KursyMVC.Models.Result>
+
+@{
+    ViewBag.Title = "Results";
+    Layout = "~/Views/Shared/Logged.cshtml";
+}
+
+<table class="table">
+    <tr>
+        <th>
+            Nazwa kursu
+        </th>
+        <th>
+            Temat kursu
+        </th>
+        <th>
+            Zdobyte punkty
+        </th>
+        <th>
+            Do zdobycia punktów
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CourseName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SectionName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Score)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalQuestions)
+        </td>
+    </tr>
+}
+
+</table>

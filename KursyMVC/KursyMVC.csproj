@@ -210,6 +210,26 @@
     <Compile Include="Models\QuestionAnswers.cs">
       <DependentUpon>TestModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\question.cs" />
+    <Compile Include="Models\QuizResults.cs">
+      <DependentUpon>ResultsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Result.cs" />
+    <Compile Include="Models\ResultsModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ResultsModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ResultsModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ResultsModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ResultsModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ResultsModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\SectionContents.cs">
       <DependentUpon>TutorialModel.tt</DependentUpon>
     </Compile>
@@ -288,6 +308,16 @@
       <DependentUpon>LoginModel.edmx</DependentUpon>
       <LastGenOutput>LoginModel.cs</LastGenOutput>
     </Content>
+    <Content Include="Models\ResultsModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ResultsModel.edmx</DependentUpon>
+      <LastGenOutput>ResultsModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\ResultsModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ResultsModel.edmx</DependentUpon>
+      <LastGenOutput>ResultsModel.cs</LastGenOutput>
+    </Content>
     <Content Include="Models\TestModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>TestModel.edmx</DependentUpon>
@@ -348,6 +378,13 @@
     <Content Include="Models\TestModel.edmx.diagram">
       <DependentUpon>TestModel.edmx</DependentUpon>
     </Content>
+    <EntityDeploy Include="Models\ResultsModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ResultsModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\ResultsModel.edmx.diagram">
+      <DependentUpon>ResultsModel.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -375,6 +412,8 @@
     <Content Include="Views\Student\CategoryContent.cshtml" />
     <Content Include="Views\Student\Tutorial.cshtml" />
     <Content Include="Views\Student\Test.cshtml" />
+    <Content Include="Views\Student\TestResult.cshtml" />
+    <Content Include="Views\Student\Results.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
