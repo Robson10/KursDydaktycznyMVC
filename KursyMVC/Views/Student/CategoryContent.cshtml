@@ -1,0 +1,29 @@
+﻿@model IEnumerable<KursyMVC.Models.CourseSections>
+
+@{
+    ViewBag.Title = "CategoryContent";
+    Layout = "~/Views/Shared/Logged.cshtml";
+}
+
+@if(Session["Kategoria"] != null){<h2> @Session["Kategoria"].ToString() </h2>}
+
+<table class="table">
+    <tr>
+        <th>
+            Temat
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.ActionLink(@Html.DisplayFor(modelItem => item.SectionName).ToString(), "Tutorial", new { id = item.CourseSectionID})
+        </td>
+        <td>
+            @Html.ActionLink("Test", "Test", new { id=item.CourseSectionID })
+        </td>
+    </tr>
+}
+
+</table>

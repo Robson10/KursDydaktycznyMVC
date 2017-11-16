@@ -1,0 +1,24 @@
+﻿@model IEnumerable<KursyMVC.Models.Courses>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Logged.cshtml";
+}
+
+<h2>Kursy</h2>
+
+<table class="table">
+
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.ActionLink(@Html.DisplayFor(modelItem => item.CourseName).ToString(),"CategoryContent", new { id = item.CourseID ,Name=item.CourseName})
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CourseDescription)
+        </td>
+    </tr>
+}
+
+</table>

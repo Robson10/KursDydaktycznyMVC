@@ -1,0 +1,22 @@
+﻿@model IEnumerable<KursyMVC.Models.SectionContents>
+
+@{
+    ViewBag.Title = "Tutorial";
+    Layout = "~/Views/Shared/Logged.cshtml";
+}
+<table class="table" style="border-width:0">
+
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                <h2>@Html.DisplayFor(modelItem => item.SectionContentTitle)</h2>
+                <br />
+                <br />
+                <h3>@Html.DisplayFor(modelItem => item.CourseSections.SectionName)</h3>
+                <br />
+                @Html.DisplayFor(modelItem => item.SectionContent)
+            </td>
+    </tr>
+}
+
+</table>

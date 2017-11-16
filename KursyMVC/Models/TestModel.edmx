@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="TestModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="QuestionAnswers">
+          <Key>
+            <PropertyRef Name="QuestionAnswerID" />
+          </Key>
+          <Property Name="QuestionAnswerID" Type="int" Nullable="false" />
+          <Property Name="SectionQuestionID" Type="int" />
+          <Property Name="AnswerText" Type="varchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SectionQuestions">
+          <Key>
+            <PropertyRef Name="SectionQuestionID" />
+          </Key>
+          <Property Name="SectionQuestionID" Type="int" Nullable="false" />
+          <Property Name="CourseSectionID" Type="int" />
+          <Property Name="QuestionText" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="CorrectAnswer" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_QUESTION_RELATIONS_SECTIONQ">
+          <End Role="SectionQuestions" Type="Self.SectionQuestions" Multiplicity="0..1" />
+          <End Role="QuestionAnswers" Type="Self.QuestionAnswers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SectionQuestions">
+              <PropertyRef Name="SectionQuestionID" />
+            </Principal>
+            <Dependent Role="QuestionAnswers">
+              <PropertyRef Name="SectionQuestionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TestModelStoreContainer">
+          <EntitySet Name="QuestionAnswers" EntityType="Self.QuestionAnswers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SectionQuestions" EntityType="Self.SectionQuestions" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_QUESTION_RELATIONS_SECTIONQ" Association="Self.FK_QUESTION_RELATIONS_SECTIONQ">
+            <End Role="SectionQuestions" EntitySet="SectionQuestions" />
+            <End Role="QuestionAnswers" EntitySet="QuestionAnswers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TestModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="QuestionAnswers">
+          <Key>
+            <PropertyRef Name="QuestionAnswerID" />
+          </Key>
+          <Property Name="QuestionAnswerID" Type="Int32" Nullable="false" />
+          <Property Name="SectionQuestionID" Type="Int32" />
+          <Property Name="AnswerText" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="SectionQuestions" Relationship="Self.FK_QUESTION_RELATIONS_SECTIONQ" FromRole="QuestionAnswers" ToRole="SectionQuestions" />
+        </EntityType>
+        <EntityType Name="SectionQuestions">
+          <Key>
+            <PropertyRef Name="SectionQuestionID" />
+          </Key>
+          <Property Name="SectionQuestionID" Type="Int32" Nullable="false" />
+          <Property Name="CourseSectionID" Type="Int32" />
+          <Property Name="QuestionText" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CorrectAnswer" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="QuestionAnswers" Relationship="Self.FK_QUESTION_RELATIONS_SECTIONQ" FromRole="SectionQuestions" ToRole="QuestionAnswers" />
+        </EntityType>
+        <Association Name="FK_QUESTION_RELATIONS_SECTIONQ">
+          <End Role="SectionQuestions" Type="Self.SectionQuestions" Multiplicity="0..1" />
+          <End Role="QuestionAnswers" Type="Self.QuestionAnswers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SectionQuestions">
+              <PropertyRef Name="SectionQuestionID" />
+            </Principal>
+            <Dependent Role="QuestionAnswers">
+              <PropertyRef Name="SectionQuestionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TestEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="QuestionAnswers" EntityType="Self.QuestionAnswers" />
+          <EntitySet Name="SectionQuestions" EntityType="Self.SectionQuestions" />
+          <AssociationSet Name="FK_QUESTION_RELATIONS_SECTIONQ" Association="Self.FK_QUESTION_RELATIONS_SECTIONQ">
+            <End Role="SectionQuestions" EntitySet="SectionQuestions" />
+            <End Role="QuestionAnswers" EntitySet="QuestionAnswers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TestModelStoreContainer" CdmEntityContainer="TestEntities">
+          <EntitySetMapping Name="QuestionAnswers">
+            <EntityTypeMapping TypeName="TestModel.QuestionAnswers">
+              <MappingFragment StoreEntitySet="QuestionAnswers">
+                <ScalarProperty Name="QuestionAnswerID" ColumnName="QuestionAnswerID" />
+                <ScalarProperty Name="SectionQuestionID" ColumnName="SectionQuestionID" />
+                <ScalarProperty Name="AnswerText" ColumnName="AnswerText" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SectionQuestions">
+            <EntityTypeMapping TypeName="TestModel.SectionQuestions">
+              <MappingFragment StoreEntitySet="SectionQuestions">
+                <ScalarProperty Name="SectionQuestionID" ColumnName="SectionQuestionID" />
+                <ScalarProperty Name="CourseSectionID" ColumnName="CourseSectionID" />
+                <ScalarProperty Name="QuestionText" ColumnName="QuestionText" />
+                <ScalarProperty Name="CorrectAnswer" ColumnName="CorrectAnswer" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

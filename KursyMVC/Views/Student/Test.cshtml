@@ -1,0 +1,45 @@
+﻿@model KursyMVC.Controllers.question
+
+@{
+    ViewBag.Title = "Test";
+    Layout = "~/Views/Shared/Logged.cshtml";
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        
+        
+        @*@foreach (var item in Model)
+        {*@
+            <tr>
+                <td>
+                    <div class="form-group">
+                        @Html.Label(Model.QuestionText, htmlAttributes: new {@class = "form-control" })
+                    </div>
+                </td>
+            </tr>
+            <div class="form-group form-inline">
+                @Html.EditorFor(model => Model.Checkboxes, new {htmlAttributes = new {@class = "form-control", style = "width:20px;" } })
+                @Html.Label(Model.Answers)
+            </div>
+            //for (int i = 0; i < item.Answers.Count; i++)
+            // {
+
+            // }
+            break;
+        @*}*@
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back", "CategoryContent")
+</div>
